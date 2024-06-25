@@ -4,7 +4,6 @@ on:
   - workflow_dispatch
 
 jobs:
-
   job-1:
     name: echo-hello
     runs-on: ubuntu-latest
