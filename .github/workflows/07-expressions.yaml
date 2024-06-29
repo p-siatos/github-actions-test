@@ -17,14 +17,12 @@ jobs:
                 echo "Branch: ${{github.Ref}}"
                 echo "Commit SHA: ${{github.SHA}}"
                 echo "Runner OS: ${{runner.OS}}"
-                echo "branch1: ${{github.ref_name}}"
-                echo "branch2: ${{github.ref}}"
-                echo "branch3: ${{github.workflow_ref}}"
-            # - name: "[debug] Print when triggered from main"
-            #   if: ${{inputs.debug}} == true && ${{github.ref_name}} 
-            #   run: |
-            #     echo "Hello"
-
-
+            - name: "[debug] Print when triggered from main"
+              if: ${{inputs.debug}} == true && ${{github.ref_name}} == 'main'
+              run: |
+                echo "I was triggered from main"
+            - name: Greeting
+              run: |
+                echo "Hello, world"
 
 
