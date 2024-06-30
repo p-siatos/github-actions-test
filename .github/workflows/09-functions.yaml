@@ -13,6 +13,7 @@ jobs:
               run: |
                 cat << EOF
                 ${{toJson(github.event.pull_request.labels)}} 
+                EOF
             - name: Bug step
               if: ${{failure() && contains(github.event.pull_request.title, 'fix')}}
               run: echo "I am a bug fix"
@@ -32,4 +33,3 @@ jobs:
             - name: I will execute when cancelled
               if: ${{cancelled()}}
               run: echo "I will print if the workflow is cancelled"
-
