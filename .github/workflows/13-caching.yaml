@@ -10,7 +10,7 @@ jobs:
     build:
         defaults:
             run:
-                working-directory: '12-caching/react-app'
+                working-directory: '13-caching/react-app'
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code
