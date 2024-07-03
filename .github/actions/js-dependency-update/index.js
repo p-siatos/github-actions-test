@@ -1,9 +1,9 @@
 const core = require('@actions/core');
 const exec = require('@actions/exec');
 
-const validateBrachName = ({branchName}) =>
+const validateBranchName = ({ branchName }) =>
     /^[a-zA-Z0-9_\-\.\/]+$/.test(branchName);
-const validateDirectoryName = ({dirName}) =>
+  const validateDirectoryName = ({ dirName }) =>
     /^[a-zA-Z0-9_\-\/]+$/.test(dirName);
 
 async function run() {
@@ -26,14 +26,14 @@ async function run() {
     const workingDir = core.getInput('working-directory');
     const debug = core.getInput('debug');
 
-    if(!validateBrachName({branchName: baseBranch})){
+    if(!validateBranchName({branchName: baseBranch})){
         core.setFailed(
             'Invalid base-branch name.'
         );
         return;
     }
 
-    if(!validateBrachName({branchName: targetBranch})){
+    if(!validateBranchName({branchName: targetBranch})){
         core.setFailed(
             'Invalid target-branch name.'
         );
@@ -62,6 +62,12 @@ async function run() {
             cwd: workingDir,
         }
     );
+
+    if (gitStatus.stdout.length > 0) {
+        core.info('[js-dependency-update]: There are updates available.');
+    } else {
+        core.info('[js-dependency-update]: No updates at this point in time.');
+    }
 
 
 }
