@@ -1,7 +1,19 @@
 name: 17 - 2 - Custom Actions - JS
-run-name: 17 - 2- Custom Actions - JS
+run-name: |
+    17 - 2- Custom Actions - JS - Base Branch ${{inputs.base-branch}}
+    - Target Branch ${{inputs.target-branch}} - Work Dir ${{inputs.working-dir}}
+
 on:
     workflow_dispatch:
+        inputs:
+            base-branch: 
+                type: string
+            target-branch:
+                type: string
+            working-dir:
+                type: string
+            debug:
+                type: boolean
 jobs:
     dependency-update:
         runs-on: ubuntu-latest
@@ -9,6 +21,14 @@ jobs:
             - uses: actions/checkout@v4
             - name: Check  for dependency updates
               uses: ./.github/actions/js-dependency-update
+              with:
+                gh-token: ${{secrets.GITHUB_TOKEN}}
+                base-branch: ${{inputs.base-branch}}
+                target-branch: ${{inputs.target-branch}}
+                working-directory: ${{inputs.working-dir}}
+                debug: ${{inputs.debug}}
+                
+
 
 
     
