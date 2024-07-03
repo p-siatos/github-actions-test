@@ -1,10 +1,8 @@
 const core = require('@actions/core');
 const exec = require('@actions/exec');
 
-const validateBranchName = ({ branchName }) =>
-    /^[a-zA-Z0-9_\-\.\/]+$/.test(branchName);
-  const validateDirectoryName = ({ dirName }) =>
-    /^[a-zA-Z0-9_\-\/]+$/.test(dirName);
+const validateBranchName = ({ branchName }) => /^[a-zA-Z0-9_\-\.\/]+$/.test(branchName);
+  const validateDirectoryName = ({ dirName }) => /^[a-zA-Z0-9_\-\/]+$/.test(dirName);
 
 async function run() {
     /*
@@ -25,6 +23,8 @@ async function run() {
     const ghToken = core.getInput('gh-token');
     const workingDir = core.getInput('working-directory');
     const debug = core.getBooleanInput('debug');
+
+    core.setSecret(ghToken);
 
     if(!validateBranchName({branchName: baseBranch})){
         core.setFailed(
