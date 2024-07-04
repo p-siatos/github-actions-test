@@ -1,7 +1,6 @@
 name: 17 - 2 - Custom Actions - JS
 run-name: |
-    17 - 2- Custom Actions - JS|BB ${{inputs.base-branch}} - TB ${{inputs.target-branch}} - WD ${{inputs.working-dir}}
-
+    17 - 2- Custom Actions - JS | BB ${{inputs.base-branch}} - TB ${{inputs.target-branch}} - WD ${{inputs.working-dir}}
 on:
     workflow_dispatch:
         inputs:
@@ -16,6 +15,9 @@ on:
                 default: 17-custom-actions/react-app
             debug:
                 type: boolean
+permissions:
+    contents: write
+    pull-requests: write
 jobs:
     dependency-update:
         runs-on: ubuntu-latest
